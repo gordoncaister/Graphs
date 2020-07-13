@@ -44,7 +44,6 @@ class Graph:
                 visited.add(v)
                 for nv in self.vertices[v]:
                     q.enqueue(nv)
-        print()
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
@@ -121,7 +120,7 @@ class Graph:
                 np.append(nv)
                 s.push(np)
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited = None, path = None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -129,8 +128,20 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
-
+        if visited is None:
+            visited = set()
+        if path is None:
+            path = []
+        visited.add(starting_vertex)
+        path = path + [starting_vertex]
+        if starting_vertex == destination_vertex:
+            return path
+        for v in self.vertices[starting_vertex]:
+            if v not in visited:
+                np = self.dfs_recursive(v,destination_vertex,visited,path)
+                if np is not None:
+                    return np
+        
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
     # https://github.com/LambdaSchool/Graphs/blob/master/objectives/breadth-first-search/img/bfs-visit-order.png
