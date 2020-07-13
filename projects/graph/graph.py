@@ -2,7 +2,6 @@
 Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
-
 class Graph:
 
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
@@ -14,7 +13,7 @@ class Graph:
         Add a vertex to the graph.
         """
         if not vertex_id in self.vertices: 
-            self.vertices[vertex_id] = {}
+            self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
@@ -22,19 +21,29 @@ class Graph:
         """
         if v1 in self.vertices and v2 in self.vertices:
             self.vertices[v1].add(v2)
-            self.vertices[v2].add(v1)
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        if vertex_id in self.vertices:
+            return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue()
+        q.enqueue(starting_vertex)
+        visited = set()
+
+        while q.size() > 0:
+            v = q.dequeue()
+            if v not in visited:
+                print(v, end=", ")
+                visited.add(v)
+                for nv in self.vertices[v]:
+                    q.enqueue(nv)
 
     def dft(self, starting_vertex):
         """
@@ -104,6 +113,7 @@ if __name__ == '__main__':
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
     print(graph.vertices)
+    print(graph.get_neighbors(6))
 
     '''
     Valid BFT paths:
