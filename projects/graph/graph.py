@@ -40,26 +40,45 @@ class Graph:
         while q.size() > 0:
             v = q.dequeue()
             if v not in visited:
-                print(v, end=", ")
+                print(v)
                 visited.add(v)
                 for nv in self.vertices[v]:
                     q.enqueue(nv)
-
+        print()
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        s = Stack()
+        s.push(starting_vertex)
+        visited = set()
+        while s.size() > 0:
+            v = s.pop()
+            if v not in visited:
+                print(v)
+                visited.add(v)
+                for nv in self.vertices[v]:
+                    s.push(nv)
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, current_vertex, visited = None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
+
+        if first is not in visited:
+
         """
-        pass  # TODO
+        if visited == None:
+            visited = set()
+        visited.add(current_vertex)
+        print(current_vertex)
+        edges = self.vertices[current_vertex]
+        for edge in edges:
+            if edge not in visited:
+                self.dft_recursive(edge,visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
