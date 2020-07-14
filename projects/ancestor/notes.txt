@@ -1,0 +1,23 @@
+Depth First Search ( dfs ) explores all possible paths to find one with the smallest weight, traversing down the branch before traversing across the same level
+- Never revisits nodes
+- Find strongly connected components
+- Find a solution when you know there is only one solution because
+
+1) Begin at starting vertex
+2) explore vertex
+    a) if explored, adjacent vertex
+        i) explore adjacent vertex
+    b) Mark explored once all adjacent vertices have been explored (remove from stack)
+Use DFS to traverse a graph searching each branch to its deepest level before exploring another branch. Good if you are solving problem where you know the solution is very far from the root.
+
+
+Breadth First Search (BFS) explores all possible paths to find the one with the smallest weight, traversing across before traversing down. 
+- Never revisits nodes
+Uses: 
+- Very useful for pathfinding/routefinding
+- Social Networking 
+1. Begin at the starting vertex
+2. explore vertex
+    a) while +1 unscheduled vertices adjacent to the current vertex
+        i.) Schedule adjacent vertex to be explored (queue)
+3. Mark vertex as explored (remove from queue)
