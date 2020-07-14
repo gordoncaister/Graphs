@@ -16,8 +16,13 @@ Breadth First Search (BFS) explores all possible paths to find the one with the 
 Uses: 
 - Very useful for pathfinding/routefinding
 - Social Networking 
+
 1. Begin at the starting vertex
 2. explore vertex
     a) while +1 unscheduled vertices adjacent to the current vertex
         i.) Schedule adjacent vertex to be explored (queue)
 3. Mark vertex as explored (remove from queue)
+Use BFS to traverse a graph starting at levels closes to the root and finishing at those furthest away. Good if you are solving derivitive of the shortest path problem or other scenarios where you know the solution is not far from the root.
+
+Recursion: Computers are really good at keeping track of Recursion but we're used to trying to step through it in our heads. Recursion run it in our brain it doesn't really work anymore.
+
