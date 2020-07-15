@@ -29,20 +29,17 @@ def earliest_ancestor(ancestors, starting_node):
 
     longestpath = []
     longestlength = 0
+    
     for i in range(len(paths)):
         if len(paths[i]) > longestlength:
-            print(paths[i])
-            longestpath.append(paths[i])
             longestlength = len(paths[i])
-        if len(paths[i]) == longestlength:        
-            longestpath.append(paths[i])
-    
-    print(starting_node,longestpath)
+    for p in paths:
+        if len(p) == longestlength:
+            longestpath.append(p)
+    print(longestpath)
     if len(longestpath) == 1:
-        print(longestpath[0][-1])
         return(longestpath[0][-1])
     if len(longestpath) == 2:
-        print(longestpath)
         return min(longestpath[0][-1],longestpath[1][-1])
 
 
