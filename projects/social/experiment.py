@@ -14,3 +14,6 @@ if -1 == False:
   print(-1)
 else:
   print('neither')
+
+utilizing people already chatted with: currently planning on building out of wix or squarespace
+wants to be able to update pictures and update little things. 

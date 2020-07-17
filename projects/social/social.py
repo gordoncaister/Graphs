@@ -55,14 +55,17 @@ class SocialGraph:
             i += 1
         
         # Create friendships
-        combinations = list(itertools.permutations(range(num_users),2))
+
+        
+        combinations = list(itertools.combinations(range(num_users),2))
+        # print(combinations)
         random.shuffle(combinations)
+        # print("times run friendship:", (len(combinations)*(avg_friendships/(num_users))))
         j=0
-        while j < (len(combinations)*(avg_friendships/(num_users)))/2:
+        while j < (len(combinations)*(avg_friendships/(num_users))):
             self.add_friendship(combinations[j][0]+1,combinations[j][1]+1)
             j+=1
-            
-            
+
         
 
     def get_all_social_paths(self, user_id):
@@ -76,11 +79,13 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
-        
         allfriends = self.bft(user_id)
         for u in allfriends:
             visited[u] = self.bfs(user_id,u)
-            
+        
+        print(allfriends)
+        print(visited)
+        print(self.friendships)
         return visited
 
     def bft(self,user_id):
@@ -115,7 +120,7 @@ class SocialGraph:
     
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(1000, 5)
+    sg.populate_graph(10, 2)
     connections = sg.get_all_social_paths(4)
     # print("Connections:",connections)
-    print(len(connections))
+    # print(len(connections))
