@@ -37,4 +37,27 @@ start at 0:
 go north until you can't go anymore.
 turn around go back to the closest vertex that has an unexplored direction, head in that direction until you can't anymore
 repeat until you've visited every vertex
+
+
+ - add_friendship
+ - add_user
+ - populate_graph
+
+ - get_all_social_paths:
+    Takes a rooms's room.id as an argument
+
+    Returns a dictionary containing every room in that room's
+    extended network with the shortest friendship path between them.
+
+    The key is the friend's ID and the value is the path.
+    for each vertex in all_neighbours:
+        for destination_vertex in all_neighbours:
+            if vertex != destination_vertex: 
+                find the shortest path from vertex to destination_vertex
+                add to dictionary of dictionaries.
+                Key is vertex, value is : key is destination_vertex value is shortest path
+            
+    
+ - bft
+ - bfs
 """

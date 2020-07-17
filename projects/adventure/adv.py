@@ -4,7 +4,24 @@ from world import World
 
 import random
 from ast import literal_eval
-
+#helper functions
+#create friendships
+#BFS
+def bfs(vertex, destination_vertex):
+    q = []
+    q.append([vertex])
+    visited = set()
+    while len(q) > 0:
+        p = q.pop()
+        v = p[-1]
+        if v not in visited:
+            if v == destination_vertex:
+                return p
+            visited.add(v)
+            for nv in all_neighbours[v]:
+                np = list(p)
+                np.append(nv)
+                q.append(np)
 # Load world
 world = World()
 changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
@@ -34,30 +51,44 @@ explored_directions = {}
 shortest_paths = {}
 all_neighbours = {}
 for r in room_graph:
-    all_neighbours[r] = []
+    all_neighbours[r] = set()
     possible_directions[r] = room_graph[r][1]
     explored_directions[r] = {}
     for d in room_graph[r][1]:
-        all_neighbours[r].append(room_graph[r][1][d])
+        all_neighbours[r].add(room_graph[r][1][d])
         explored_directions[r][d] = "?"
-print(possible_directions)
-print(explored_directions)
-print(all_neighbours)
+# print(possible_directions)
+# print(explored_directions)
+# print(all_neighbours)
 
 visited = {}
 currdir = "n"
-print(explored_directions[player.current_room.id])
-print("?" in explored_directions[player.current_room.id])
-while len(visited) < len(room_graph):
-    explored_directions[player.current_room.id][currdir] = "explored"
-    if not possible_directions[player.current_room.id][currdir] is None:
+# print(explored_directions[player.current_room.id])
+# print("?" in explored_directions[player.current_room.id])
+
+for vertex in all_neighbours:
+    for destination_vertex in all_neighbours:
+        if vertex != destination_vertex:
+            shortest_path = bfs(vertex,destination_vertex)
+            shortest_paths[(vertex, destination_vertex)] = shortest_path
+
+print(shortest_paths)
+
+#build a list of all possible routes from each number to each number
+
+
+
+# while len(visited) < len(room_graph):
+#     explored_directions[player.current_room.id][currdir] = "explored"
+#     if possible_directions[player.current_room.id][currdir] != None:
+
         
-    for direction in explored_directions[player.current_room.id]:
-        if explored_directions[player.current_room.id][direction] == "?":
+#     for direction in explored_directions[player.current_room.id]:
+#         if explored_directions[player.current_room.id][direction] == "?":
 
-    visited[player.current_room.id] = all_neighbours[player.current_room.id]
+#     visited[player.current_room.id] = all_neighbours[player.current_room.id]
 
-    player.travel(currdir)     
+#     player.travel(currdir)     
             
 # visited = {}
 # currdir = "n"
@@ -105,8 +136,3 @@ else:
 #         print("I did not understand that command.")
 
 
-# print(len(world.rooms))
-
-
-        
-# print("VISITED:",visited)
