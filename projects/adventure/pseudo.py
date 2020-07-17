@@ -68,10 +68,31 @@ shortest_paths: {(0, 1): [0, 1], (0, 2): [0, 1, 2], (0, 3): [0, 3], (0, 4): [0, 
 0): [3, 0], (3, 1): [3, 0, 1], (3, 2): [3, 0, 1, 2], (3, 4): [3, 4], (3, 5): [3, 0, 5], (3, 6): [3, 0, 5, 6], (3, 7): [3, 0, 7], (3, 8): [3, 0, 7, 8], (4, 0): [4, 3, 0], (4, 1): [4, 3, 0, 1], (4, 2): [4, 3, 0, 1, 2], (4, 3): [4, 3], (4, 5): [4, 3, 0, 5], (4, 6): [4, 3, 0, 5, 6], (4, 7): [4, 3, 0, 7], (4, 8): [4, 3, 0, 7, 8], (5, 0): [5, 0], (5, 1): [5, 0, 1], (5, 2): [5, 0, 1, 2], (5, 3): [5, 0, 3], (5, 4): [5, 0, 3, 4], (5, 6): [5, 6], (5, 7): [5, 0, 7], (5, 8): [5, 0, 7, 8], (6, 0): [6, 5, 0], (6, 1): [6, 5, 0, 1], (6, 2): [6, 5, 0, 1, 2], (6, 3): [6, 5, 0, 3], (6, 4): [6, 5, 0, 3, 4], (6, 5): [6, 5], (6, 7): [6, 5, 0, 7], (6, 8): [6, 5, 0, 7, 8], (7, 0): [7, 0], (7, 1): [7, 0, 1], (7, 2): [7, 0, 1, 2], (7, 3): [7, 0, 3], (7, 4): [7, 0, 3, 4], (7, 5): [7, 0, 5], (7, 6): [7, 0, 5, 6], (7, 8): [7, 8], (8, 0): [8, 7, 0], (8, 1): [8, 7, 0, 1], (8, 2): [8, 7, 0, 1, 2], (8, 3): [8, 7, 0, 3], (8, 4): [8, 7, 0, 3, 4], (8, 5): [8, 7, 0, 5], (8, 
 6): [8, 7, 0, 5, 6], (8, 7): [8, 7]}
 traversal_path = []
-
+changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
 start at 0
 start going n
 
-while length of visited is less than length of possible directions or world_graph
+while length of visited is less than length of possible directions or world_graph:
+    if explored_directions[currentroom][current direction] == ?:
+        travel in current direction
+        add current direction to traversal path
+
+    if explored_directions[currentroom].values() contains "?":
+        if explored_directions[currentroom][changedirection[currentdir]] == "?":
+            currdir = changedirection[currentdir]
+    else:
+        find closest vertex with a "?"
+
+
+
+
+closest unexplored vertex (vertex, shortest_paths):
+    curr_length: 1:
+    for each key in shortest_paths[vertex]:
+        if length of shortest_paths[vertex][key] less than or = current length:
+            if explored_directions[key].values() contains ?:
+                move from current position to explored_directions[key]
+    increase current_length
+
 
 """

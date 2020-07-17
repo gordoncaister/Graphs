@@ -4,9 +4,10 @@ from world import World
 
 import random
 from ast import literal_eval
-#helper functions
-#create friendships
-#BFS
+"""
+______________________________
+Helper functions:
+"""
 def bfs(vertex, destination_vertex):
     q = []
     q.append([vertex])
@@ -22,9 +23,21 @@ def bfs(vertex, destination_vertex):
                 np = list(p)
                 np.append(nv)
                 q.append(np)
+
+def closest_unexplored(vertex,shortest_paths):
+    currlength = 1
+    for key in shortest_paths[vertex]:
+        if len(shortest_paths[vertex][key]) <= currlength:
+            if "?" in explored_directions[key[1]].values():
+                    return shortest_paths[vertex][key]
+        currlength += 1
+
+"""
+______________________________
+World Initialisation:
+"""
 # Load world
 world = World()
-changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
 
 # You may uncomment the smaller graphs for development and testing purposes.
 # map_file = "maps/test_line.txt"
@@ -36,23 +49,28 @@ map_file = "maps/test_cross.txt"
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
 world.load_graph(room_graph)
-
 # Print an ASCII map
 world.print_rooms()
-
 player = Player(world.starting_room)
 
-# Fill this out with directions to walk
-# traversal_path = ['n', 'n']
+
 """
-Build out direction and neighbour graphs
+______________________________
+Variables
 """
 traversal_path = []
-
 possible_directions = {}
 explored_directions = {}
 shortest_paths = {}
 all_neighbours = {}
+visited = {}
+currdir = "n"
+changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
+
+"""
+______________________________
+build out direction and neighbour graphs
+"""
 for r in room_graph:
     all_neighbours[r] = set()
     possible_directions[r] = room_graph[r][1]
@@ -64,51 +82,30 @@ print(possible_directions)
 print(explored_directions)
 print(all_neighbours)
 
-visited = {}
-currdir = "n"
+
 # print(explored_directions[player.current_room.id])
 # print("?" in explored_directions[player.current_room.id])
 """
+______________________________
 build out all shortest paths
 """
 for vertex in all_neighbours:
+    shortest_paths[vertex] = {}
     for destination_vertex in all_neighbours:
         if vertex != destination_vertex:
             shortest_path = bfs(vertex,destination_vertex)
-            shortest_paths[(vertex, destination_vertex)] = shortest_path
+            shortest_paths[vertex][(vertex, destination_vertex)] = shortest_path
 
 print(shortest_paths)
-
-#build a list of all possible routes from each number to each number
-
+print("Here:",closest_unexplored(0,shortest_paths))
 
 
-# while len(visited) < len(room_graph):
-#     explored_directions[player.current_room.id][currdir] = "explored"
-#     if possible_directions[player.current_room.id][currdir] != None:
+"""
+______________________________
 
-        
-#     for direction in explored_directions[player.current_room.id]:
-#         if explored_directions[player.current_room.id][direction] == "?":
-
-#     visited[player.current_room.id] = all_neighbours[player.current_room.id]
-
-#     player.travel(currdir)     
-            
-# visited = {}
-# currdir = "n"
-# while len(visited) < len(room_graph):
-#     visited[player.current_room.id] = player.current_room.get_exits()
-#     if currdir in player.current_room.get_exits():
-#         player.travel(currdir)
-#     else:
-#         break
-
-
-   
-
-
-
+Operating code, existed already
+______________________________
+"""
 
 # TRAVERSAL TEST
 visited_rooms = set()
