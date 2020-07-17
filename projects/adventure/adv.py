@@ -31,6 +31,7 @@ traversal_path = []
 
 possible_directions = {}
 explored_directions = {}
+shortest_paths = {}
 all_neighbours = {}
 for r in room_graph:
     all_neighbours[r] = []
@@ -43,23 +44,32 @@ print(possible_directions)
 print(explored_directions)
 print(all_neighbours)
 
+visited = {}
+currdir = "n"
+print(explored_directions[player.current_room.id])
+print("?" in explored_directions[player.current_room.id])
+while len(visited) < len(room_graph):
+    explored_directions[player.current_room.id][currdir] = "explored"
+    if not possible_directions[player.current_room.id][currdir] is None:
+        
+    for direction in explored_directions[player.current_room.id]:
+        if explored_directions[player.current_room.id][direction] == "?":
+
+    visited[player.current_room.id] = all_neighbours[player.current_room.id]
+
+    player.travel(currdir)     
+            
+# visited = {}
+# currdir = "n"
+# while len(visited) < len(room_graph):
+#     visited[player.current_room.id] = player.current_room.get_exits()
+#     if currdir in player.current_room.get_exits():
+#         player.travel(currdir)
+#     else:
+#         break
 
 
-
-
-
-
-# def traversal(room_id):
-#     queue = []
-#     visited = set()
-#     result = []
-#     queue.append(room_id)
-#     while len(queue) > 0:
-#         vertex = queue.pop()
-#         if vertex not in visited:
-#             result.append(vertex)
-#             visited.add(vertex)
-#     return result        
+   
 
 
 
@@ -97,16 +107,6 @@ else:
 
 # print(len(world.rooms))
 
-# visited = {}
-# print("Exits:",player.current_room.get_exits())
-# print("CURR ROOM:",player.current_room.get_room_in_direction("s").id)
-# currdir = "n"
-# while len(visited) <= 8:
-#     print(player.current_room.get_room_in_direction("n") == None)
-#     visited[player.current_room.id] = player.current_room.get_exits()
-#     if currdir in player.current_room.get_exits():
-#         player.travel(currdir)
-#     else:
-#         break
+
         
 # print("VISITED:",visited)
