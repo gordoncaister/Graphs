@@ -44,6 +44,9 @@ player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
+"""
+Build out direction and neighbour graphs
+"""
 traversal_path = []
 
 possible_directions = {}
@@ -57,15 +60,17 @@ for r in room_graph:
     for d in room_graph[r][1]:
         all_neighbours[r].add(room_graph[r][1][d])
         explored_directions[r][d] = "?"
-# print(possible_directions)
-# print(explored_directions)
-# print(all_neighbours)
+print(possible_directions)
+print(explored_directions)
+print(all_neighbours)
 
 visited = {}
 currdir = "n"
 # print(explored_directions[player.current_room.id])
 # print("?" in explored_directions[player.current_room.id])
-
+"""
+build out all shortest paths
+"""
 for vertex in all_neighbours:
     for destination_vertex in all_neighbours:
         if vertex != destination_vertex:
