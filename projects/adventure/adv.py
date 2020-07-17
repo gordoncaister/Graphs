@@ -38,6 +38,31 @@ Variables
 """
 traversal_path = []
 
+path = []
+roomstack = []
+roomstack.append(player.current_room.id)
+visitedrooms = set()
+while len(visitedrooms) != len(world.rooms):
+    currentroom = roomstack[-1]
+    visitedrooms.add(currentroom)
+    queue = []
+    neighbours = room_graph[currentroom][1]
+    for room in neighbours.values():
+        if room not in visitedrooms:
+            print(room)
+            queue.append(room)
+
+    if len(queue) > 0:
+        nex = queue[0]
+        roomstack.append(nex)
+    else:
+        roomstack.pop()
+        nex = roomstack[-1]
+        
+    for room in neighbours.items():
+        if room[1] == nex:
+            traversal_path.append(room[0])
+
 
 print(traversal_path)
 """

@@ -18,7 +18,7 @@ while number of visited rooms != number of world rooms:
 
     for room in world_graph[currentroom][1]:
         if room is the last item on the stack:
-            add the room to the traversal path
+            add the room direction to the traversal path
 
 
 
