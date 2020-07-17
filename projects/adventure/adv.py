@@ -38,7 +38,7 @@ Variables
 """
 traversal_path = []
 
-path = []
+
 roomstack = []
 roomstack.append(player.current_room.id)
 visitedrooms = set()
