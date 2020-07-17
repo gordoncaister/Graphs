@@ -1,3 +1,5 @@
+import itertools
+import random
 class User:
     def __init__(self, name):
         self.name = name
@@ -38,6 +40,8 @@ class SocialGraph:
 
         The number of users must be greater than the average number of friendships.
         """
+
+        
         # Reset graph
         self.last_id = 0
         self.users = {}
@@ -45,8 +49,24 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Add users
-
+        i=0
+        while i < num_users:
+            self.add_user(i+1)
+            i += 1
+        
         # Create friendships
+
+        
+        combinations = list(itertools.combinations(range(num_users),2))
+        # print(combinations)
+        random.shuffle(combinations)
+        # print("times run friendship:", (len(combinations)*(avg_friendships/(num_users))))
+        j=0
+        while j < (len(combinations)*(avg_friendships/(num_users))):
+            self.add_friendship(combinations[j][0]+1,combinations[j][1]+1)
+            j+=1
+
+        
 
     def get_all_social_paths(self, user_id):
         """
@@ -59,12 +79,48 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        allfriends = self.bft(user_id)
+        for u in allfriends:
+            visited[u] = self.bfs(user_id,u)
+        
+        print(allfriends)
+        print(visited)
+        print(self.friendships)
         return visited
 
+    def bft(self,user_id):
+        q = []
+        vis = set()
+        result = []
+        q.append(user_id)
+        while len(q) > 0:
+            v = q.pop()
+            if v not in vis:
+                result.append(v)
+                vis.add(v)
+                for nv in self.friendships[v]:
+                    q.append(nv)
+        return result
 
+    def bfs(self, starting_vertex, destination_vertex):
+        q = []
+        q.append([starting_vertex])
+        visited = set()
+        while len(q) > 0:
+            p = q.pop()
+            v = p[-1]
+            if v not in visited:
+                if v == destination_vertex:
+                    return p
+                visited.add(v)
+                for nv in self.friendships[v]:
+                    np  = list(p)
+                    np.append(nv)
+                    q.append(np)
+    
 if __name__ == '__main__':
     sg = SocialGraph()
     sg.populate_graph(10, 2)
-    print(sg.friendships)
-    connections = sg.get_all_social_paths(1)
-    print(connections)
+    connections = sg.get_all_social_paths(4)
+    # print("Connections:",connections)
+    # print(len(connections))

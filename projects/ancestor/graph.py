@@ -52,14 +52,15 @@ class Graph:
         s = Stack()
         s.push(starting_vertex)
         visited = set()
+        result =[]
         while s.size() > 0:
             v = s.pop()
             if v not in visited:
-                print(v)
+                result.append(v)
                 visited.add(v)
                 for nv in self.vertices[v]:
                     s.push(nv)
-
+        return(result)
     def dft_recursive(self, current_vertex, visited = None):
         """
         Print each vertex in depth-first order
