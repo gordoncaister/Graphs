@@ -1,5 +1,25 @@
 """
 NAIVE SOLUTION
+create a room stack:
+create a visited room set
+while number of visited rooms != number of world rooms:
+    currentroom = last room in stack
+    add current room to visited room
+    create a queue
+    for room in world_graph[currentroom][1]:
+        if room not in visited:
+            add room to the queue
+    
+    if the queue has items:
+        put next queue on the stack of rooms.
+    else:
+        pop current room from stack
+
+
+    for room in world_graph[currentroom][1]:
+        if room is the last item on the stack:
+            add the room to the traversal path
+
 
 
 """
