@@ -4,16 +4,7 @@ from world import World
 
 import random
 from ast import literal_eval
-"""
-______________________________
-Helper functions:
-"""
 
-
-"""
-______________________________
-World Initialisation:
-"""
 # Load world
 world = World()
 
@@ -31,22 +22,17 @@ world.load_graph(room_graph)
 world.print_rooms()
 player = Player(world.starting_room)
 
-
-"""
-______________________________
-Variables
-"""
 traversal_path = []
-
-
 roomstack = []
 roomstack.append(player.current_room.id)
 visitedrooms = set()
+
 while len(visitedrooms) != len(world.rooms):
     currentroom = roomstack[-1]
     visitedrooms.add(currentroom)
     queue = []
     neighbours = room_graph[currentroom][1]
+
     for room in neighbours.values():
         if room not in visitedrooms:
             print(room)
@@ -63,14 +49,6 @@ while len(visitedrooms) != len(world.rooms):
         if room[1] == nex:
             traversal_path.append(room[0])
 
-
-print(traversal_path)
-"""
-______________________________
-
-Operating code, existed already
-______________________________
-"""
 
 # TRAVERSAL TEST
 visited_rooms = set()
