@@ -1,4 +1,10 @@
 """
+NAIVE SOLUTION
+
+
+"""
+
+"""
 #####
 #                                        #
 #      017       002       014           #
@@ -120,6 +126,12 @@ while the length of the fully explored is length than the possible directions:
             steps_to_traversal(curroom, bfs(currroom, closest_unexplored))
     else: 
         change currentdirection
+Bugs
 
-*** Everytime I make a step I need to add the previous room to the new rooms list of directions as well as the new room to the previous rooms.
+CHECK *** Everytime I make a step I need to add the previous room to the new rooms list of directions as well as the new room to the previous rooms. 
+
+*** main logic doesn't consider that the expected direction may exist but may also have been explored.
+
+*** Current direction needs to be changed to the direction of the path[-2] to the path[-1]
 """
+
