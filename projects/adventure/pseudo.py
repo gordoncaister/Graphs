@@ -28,6 +28,13 @@ Map the whole graph. Get every possible edge, and every possible path between tw
 travel in a direction, marking that direction as travelled for that vertex in a dictionary. once you can no longer travel any more. Look for the closest vertex that has a missing direction. travel in that missing direction for as long as possible. rinse and repeat. 
 
 
+get list of all possible directions from each node: {0: {'n': 1, 's': 5, 'e': 3, 'w': 7},}
+build an unexplored list of every possible node: {0: {'n': '?', 's': '?', 'e': '?', 'w': '?'}}
+build a graph with all connections being two way: {0, [(0,1),(0,3),(0,5),(0,7)],}
+build a list of all possible routes from each number to each number
 
-
+start at 0:
+go north until you can't go anymore.
+turn around go back to the closest vertex that has an unexplored direction, head in that direction until you can't anymore
+repeat until you've visited every vertex
 """

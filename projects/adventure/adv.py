@@ -11,9 +11,9 @@ changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
 
 # You may uncomment the smaller graphs for development and testing purposes.
 # map_file = "maps/test_line.txt"
-# map_file = "maps/test_cross.txt"
+map_file = "maps/test_cross.txt"
 # map_file = "maps/test_loop.txt"
-map_file = "maps/test_loop_fork.txt"
+# map_file = "maps/test_loop_fork.txt"
 # map_file = "maps/main_maze.txt"
 
 # Loads the map into a dictionary
@@ -29,21 +29,37 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
-print(len(world.rooms))
+possible_directions = {}
+explored_directions = {}
+all_neighbours = {}
+for r in room_graph:
+    all_neighbours[r] = []
+    possible_directions[r] = room_graph[r][1]
+    explored_directions[r] = {}
+    for d in room_graph[r][1]:
+        all_neighbours[r].append(room_graph[r][1][d])
+        explored_directions[r][d] = "?"
+print(possible_directions)
+print(explored_directions)
+print(all_neighbours)
 
-visited = {}
-print("Exits:",player.current_room.get_exits())
-print("CURR ROOM:",player.current_room.get_room_in_direction("s").id)
-currdir = "n"
-while len(visited) <= 8:
-    print(player.current_room.get_room_in_direction("n") == None)
-    visited[player.current_room.id] = player.current_room.get_exits()
-    if currdir in player.current_room.get_exits():
-        player.travel(currdir)
-    else:
-        break
-        
-print("VISITED:",visited)
+
+
+
+
+
+
+# def traversal(room_id):
+#     queue = []
+#     visited = set()
+#     result = []
+#     queue.append(room_id)
+#     while len(queue) > 0:
+#         vertex = queue.pop()
+#         if vertex not in visited:
+#             result.append(vertex)
+#             visited.add(vertex)
+#     return result        
 
 
 
@@ -78,3 +94,19 @@ else:
 #     else:
 #         print("I did not understand that command.")
 
+
+# print(len(world.rooms))
+
+# visited = {}
+# print("Exits:",player.current_room.get_exits())
+# print("CURR ROOM:",player.current_room.get_room_in_direction("s").id)
+# currdir = "n"
+# while len(visited) <= 8:
+#     print(player.current_room.get_room_in_direction("n") == None)
+#     visited[player.current_room.id] = player.current_room.get_exits()
+#     if currdir in player.current_room.get_exits():
+#         player.travel(currdir)
+#     else:
+#         break
+        
+# print("VISITED:",visited)
