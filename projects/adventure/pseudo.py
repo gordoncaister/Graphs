@@ -94,9 +94,17 @@ closest unexplored vertex (vertex, shortest_paths):
                 move from current position to explored_directions[key]
     increase current_length
 
+(8): [7, 0, 1, 2]
+
 steps for traversal(currroom,path):
-    for room in path:
-        if room is not currroom:
+    result = []
+    for index in range(len(path)):
+        for direction in possible_directions[currroom]:
+            if possible_directions[currroom][direction] == path[i]:
+                result.append(direction)
+    return result
+        
+        
 
 
 
@@ -113,5 +121,5 @@ while the length of the fully explored is length than the possible directions:
     else: 
         change currentdirection
 
-
+*** Everytime I make a step I need to add the previous room to the new rooms list of directions as well as the new room to the previous rooms.
 """

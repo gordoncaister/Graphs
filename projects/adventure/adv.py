@@ -9,6 +9,7 @@ ______________________________
 Helper functions:
 """
 def bfs(vertex, destination_vertex):
+    
     q = []
     q.append([vertex])
     visited = set()
@@ -17,7 +18,9 @@ def bfs(vertex, destination_vertex):
         v = p[-1]
         if v not in visited:
             if v == destination_vertex:
-                return p.remove(vertex)
+                
+                p.remove(vertex)
+                return p
             visited.add(v)
             for nv in all_neighbours[v]:
                 np = list(p)
@@ -25,12 +28,22 @@ def bfs(vertex, destination_vertex):
                 q.append(np)
 
 def closest_unexplored(vertex,shortest_paths):
+    
     currlength = 1
     for key in shortest_paths[vertex]:
         if len(shortest_paths[vertex][key]) <= currlength:
             if "?" in explored_directions[key[1]].values():
                     return shortest_paths[vertex][key]
         currlength += 1
+
+def steps_for_traversal(currentroom, path):
+    result = []
+    for i in range(len(path)):
+        for d in possible_directions[currentroom]:
+            if possible_directions[currentroom][d] == path[i]:
+                result.append(d)
+        currentroom = path[i]
+    return result
 
 """
 ______________________________
@@ -67,6 +80,7 @@ fully_explored = {}
 currdir = "n"
 currroom = 0
 changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
+oppdirection = {"n":"s", "w":"e", "e":"w", "s":"n"}
 
 """
 ______________________________
@@ -103,18 +117,26 @@ for vertex in all_neighbours:
 ______________________________
 main logic
 """
-while len(fully_explored) < len(possible_directions):
+# print(steps_for_traversal(8,[7, 0, 1, 2]))
+# while len(fully_explored) < len(possible_directions):
+for i in range(20):
+    print(currroom,currdir,possible_directions[currroom])
     if not "?" in explored_directions[currroom].values():
-        fully_explored[currroom] = True
+                fully_explored[currroom] = True
     if currdir in possible_directions[currroom]:
         if not possible_directions[currroom][currdir] in fully_explored:
             explored_directions[currroom][currdir] = possible_directions[currroom][currdir]
+            explored_directions[possible_directions[currroom][currdir]][oppdirection[currdir]] = currroom
+            
             currroom = possible_directions[currroom][currdir]
             traversal_path.append(currdir)
         else:
             closest = closest_unexplored(currroom,shortest_paths)
-            
-            
+            steps = steps_for_traversal(currroom,closest)
+            for step in steps:
+                traversal_path.append(step)
+    else:
+        currdir = changedirection[currdir]
 
 
 """
