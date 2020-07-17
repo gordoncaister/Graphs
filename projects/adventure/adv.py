@@ -35,18 +35,15 @@ while len(visitedrooms) != len(world.rooms):
 
     for room in neighbours.values():
         if room not in visitedrooms:
-            print(room)
             queue.append(room)
 
     if len(queue) > 0:
-        nex = queue[0]
-        roomstack.append(nex)
+        roomstack.append(queue[0])
     else:
-        roomstack.pop()
-        nex = roomstack[-1]
-        
+        roomstack.pop()     
+
     for room in neighbours.items():
-        if room[1] == nex:
+        if room[1] == roomstack[-1]:
             traversal_path.append(room[0])
 
 
