@@ -94,5 +94,24 @@ closest unexplored vertex (vertex, shortest_paths):
                 move from current position to explored_directions[key]
     increase current_length
 
+steps for traversal(currroom,path):
+    for room in path:
+        if room is not currroom:
+
+
+
+while the length of the fully explored is length than the possible directions:
+    if explored_directions[currroom] does not contain ?:
+        fully_explored[currroom] = True
+    if the currroom has a room in the currentdirection:
+        if that room is not in the fully_explored list:
+            update the explored_directions for the current room with the room in current direction
+            move to that room
+        else:
+            find the closest unexplored room from the current room
+            steps_to_traversal(curroom, bfs(currroom, closest_unexplored))
+    else: 
+        change currentdirection
+
 
 """

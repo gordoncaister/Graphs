@@ -17,7 +17,7 @@ def bfs(vertex, destination_vertex):
         v = p[-1]
         if v not in visited:
             if v == destination_vertex:
-                return p
+                return p.remove(vertex)
             visited.add(v)
             for nv in all_neighbours[v]:
                 np = list(p)
@@ -63,8 +63,9 @@ possible_directions = {}
 explored_directions = {}
 shortest_paths = {}
 all_neighbours = {}
-visited = {}
+fully_explored = {}
 currdir = "n"
+currroom = 0
 changedirection = {"n":"w", "w":"e", "e":"s", "s":"n"}
 
 """
@@ -78,9 +79,9 @@ for r in room_graph:
     for d in room_graph[r][1]:
         all_neighbours[r].add(room_graph[r][1][d])
         explored_directions[r][d] = "?"
-print(possible_directions)
-print(explored_directions)
-print(all_neighbours)
+# print(possible_directions)
+# print(explored_directions)
+# print(all_neighbours)
 
 
 # print(explored_directions[player.current_room.id])
@@ -96,8 +97,24 @@ for vertex in all_neighbours:
             shortest_path = bfs(vertex,destination_vertex)
             shortest_paths[vertex][(vertex, destination_vertex)] = shortest_path
 
-print(shortest_paths)
-print("Here:",closest_unexplored(0,shortest_paths))
+# print("Here:",closest_unexplored(0,shortest_paths))
+
+"""
+______________________________
+main logic
+"""
+while len(fully_explored) < len(possible_directions):
+    if not "?" in explored_directions[currroom].values():
+        fully_explored[currroom] = True
+    if currdir in possible_directions[currroom]:
+        if not possible_directions[currroom][currdir] in fully_explored:
+            explored_directions[currroom][currdir] = possible_directions[currroom][currdir]
+            currroom = possible_directions[currroom][currdir]
+            traversal_path.append(currdir)
+        else:
+            closest = closest_unexplored(currroom,shortest_paths)
+            
+            
 
 
 """
